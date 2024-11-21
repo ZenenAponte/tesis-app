@@ -1,36 +1,20 @@
-import React from 'react';
-import Navbar from './components/navbar';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Contribuyente from './components/contribuyente';
-import Otro from './components/otro';
-import Home from './components/home';
-import ReclaMas from './components/reclaMas';
-import Impu_mas from './components/impuMas';
-import DeclaMas from './components/declaMas';
-import Prueba from './components/Prueba';
+import React from 'react'
+import Home from './components/Home'
+import Navbar from './components/navbar/Navbar.jsx'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Container } from '@mui/material'
+import Lugar from './components/formularios/Lugar.jsx'
 
-
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <Router>
-        <Navbar />
+    <BrowserRouter>
+      <Navbar />
+      <Container>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/contribuyente" element={<Contribuyente />} />
-          <Route path="/otro" element={<Otro />} />
-          <Route path="/recla_mas" element={<ReclaMas />} />
-          <Route path="/impu_mas" element={<Impu_mas />} />
-          <Route path="/decla_mas" element={<DeclaMas />} />
-          <Route path="/prueba" element={<Prueba/>} />
-        
-         
+          <Route path='/' element={<Home />} />
+          <Route path='/lugar' element={<Lugar />} />
         </Routes>
-      </Router>
-
-    </div>
-  );
+      </Container>
+    </BrowserRouter>
+  )
 }
-
-export default App;
-
