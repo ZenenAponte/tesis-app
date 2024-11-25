@@ -21,7 +21,7 @@ export default function Lugar() {
         setLoading(true)
 
         if (editing) {
-            await fetch ('http://localhost:4000/lugar/${id_lugar}',{
+            await fetch (`http://localhost:4000/lugar/${id_lugar}`,{
                 method: 'PUT',
                 headers: {
                     "Contenet-Type": "applicaion/json",
@@ -47,7 +47,7 @@ export default function Lugar() {
     }
 
     const loadUnLugar = async (id_lugar) => {
-        const res = await fetch('http://localhost:4000/lugar/${id_lugar}')
+        const res = await fetch(`http://localhost:4000/lugar/${id_lugar}`)
         const data = await res.json()
         setLugar({lugar: data.lugar})
         setEditing(true )
