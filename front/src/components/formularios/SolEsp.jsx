@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 
-export default function Lugar() {
+export default function SolEsp() {
 
-    const [lugar, setLugar] = useState({
-        lugar: '',
+    const [tipo, setTipo] = useState({
+        tipo: '',
     })
 
     const [loading, setLoading] = useState(false)
@@ -21,36 +21,36 @@ export default function Lugar() {
         setLoading(true)
 
         if (editing) {
-            await fetch(`http://localhost:4000/lugar/`, {
+            await fetch(`http://localhost:4000/solEsp/`, {
                 method: 'PUT',
                 headers: {
                     "Contenet-Type": "applicaion/json",
                 },
-                body: JSON.stringify(lugar),
+                body: JSON.stringify(tipo),
             });
 
         } else {
-            await fetch('http://localhost:4000/lugar', {
+            await fetch('http://localhost:4000/solEsp', {
                 method: 'POST',
-                body: JSON.stringify(lugar),
+                body: JSON.stringify(tipo),
                 headers: { 'Content-Type': 'application/json' },
             })
 
         }
 
         setLoading(false)
-        navegate('/lugar')
+        navegate('/')
     }
 
     const handleChange = (e) => {
-        setLugar({ ...lugar, [e.target.name]: e.target.value });
+        setTipo({ ...tipo, [e.target.name]: e.target.value });
     }
 
-    const loadUnLugar = async (id_lugar) => {
-        const res = await fetch(`http://localhost:4000/lugar/${id_lugar}`)
+    const loadUnSol = async (id_sol_esp) => {
+        const res = await fetch(`http://localhost:4000/solEsp/${id_sol_esp}`)
         const data = await res.json()
         console.log(data)
-        //setLugar({ lugar: data.lugar })
+        //setTipo({ lugar: data.lugar })
         //setEditing(true)
     };
 
@@ -58,10 +58,10 @@ export default function Lugar() {
 
 
     useEffect(() => {
-        if (params.id_lugar) {
-            loadUnLugar(params.id_lugar);
+        if (params.id_sol_esp) {
+            loadUnSol(params.id_sol_esp);
         }
-    }, [params.id_lugar]);
+    }, [params.id_sol_esp]);
 
 
 
@@ -77,15 +77,15 @@ export default function Lugar() {
 
             >
                 <Typography variant='h5' textAlign={'center'} padding={'5 rem'} >
-                    {editing ? "Editar Lugar" : "Añadir un lugar"}
+                    {editing ? "Editar Solicitud" : "Añadir una Solicitud"}
                 </Typography>
                 <CardContent>
                     <form onSubmit={handleSubmit}>
                         <TextField
-                            name='lugar'
-                            value={lugar.lugar}
+                            name='tipo'
+                            value={tipo.tipo}
                             variant='filled'
-                            label='Escriba un Lugar'
+                            label='Escriba su Solicitud'
                             sx={{
                                 display: 'block',
                                 margin: '1.5 rem '
@@ -95,7 +95,7 @@ export default function Lugar() {
                         <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
 
                         <Button variant='contained' color='primary' type='submit' disabled={
-                            !lugar.lugar
+                            !tipo.tipo
                         }>
                             {loading ? <CircularProgress
                                 color='inherit'
@@ -104,7 +104,7 @@ export default function Lugar() {
                             /> : 'Guardar'}
                         </Button>
                         <Button
-                            variant='contained' color='error' onClick={() => navegate('/lugar')}
+                            variant='contained' color='error' onClick={() => navegate('/')}
                         > 
                             Cancelar
                         </Button>

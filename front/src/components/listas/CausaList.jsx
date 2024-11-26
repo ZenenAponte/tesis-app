@@ -2,7 +2,7 @@ import { Button, Card, CardContent, Container, Typography, TextField } from "@mu
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export default function LugarList() {
+export default function CausaList() {
 
   const [lugars, setLugars] = useState([])
   const [searchTerm, setSearchTerm] = useState(""); // Término de búsqueda
@@ -80,26 +80,26 @@ export default function LugarList() {
           style={{ marginBottom: "1.5rem" }}
         />
 
-        {currentLugars.map((lugar) => (
+        {currentLugars.map((causa) => (
           <Card style={{
             marginBottom: ".8rem",
             backgroundColor: "GrayText"
           }}
-            key={lugar.id_lugar}
+            key={causa.id_causa}
           >
             <CardContent style={{
               display: "flex",
               justifyContent: "space-between"
             }}>
               <div>
-                <Typography>{lugar.lugar}</Typography>
+                <Typography>{causa.lugar}</Typography>
               </div>
 
               <div>
                 <Button
                   variant="contained"
                   color="warning"
-                  onClick={() => navegate(`/lugar/${lugar.id_lugar}/edit`)}
+                  onClick={() => navegate(`/lugar/${causa.id_causa}/edit`)}
                 >
                   Editar
                 </Button>
@@ -109,7 +109,7 @@ export default function LugarList() {
                   color="error"
                   onClick={() => {
                     if (window.confirm("¿Está seguro de que desea eliminar este elemento?")) {
-                      handleDelete(lugar.id_lugar);
+                      handleDelete(causa.id_causa);
                     }
                   }}
                   style={{
