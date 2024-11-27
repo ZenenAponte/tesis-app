@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 export default function LugarList() {
 
-  const [lugars, setLugars] = useState([])
+  const [estado, setEstado] = useState([])
   const [searchTerm, setSearchTerm] = useState(""); // Término de búsqueda
   const [currentPage, setCurrentPage] = useState(1); // Página actual
   const itemsPerPage = 4; // Máximo de elementos por página
@@ -12,21 +12,21 @@ export default function LugarList() {
 
   const navegate = useNavigate()
 
-  const loadLugar = async () => {
-    const response = await fetch('http://localhost:4000/lugar')
+  const loadEstado = async () => {
+    const response = await fetch('http://localhost:4000/estado')
     const data = await response.json()
-    setLugars(data)
+    setEstado(data)
   }
 
 
 
-  const handleDelete = async (id_lugar) => {
+  const handleDelete = async (id_estado) => {
     try {
-      const res = await fetch(`http://localhost:4000/lugar/${id_lugar}`, {
+      const res = await fetch(`http://localhost:4000/estado/${id_estado}`, {
         method: "DELETE",
       })
       console.log(res)
-      setLugars(lugars.filter(lugar => lugar.id_lugar !== id_lugar));
+      setEstado(estado.filter(estado => estado.id_estado !== id_estado));
 
     } catch (error) {
       console.log(error)
@@ -34,19 +34,19 @@ export default function LugarList() {
   };
 
   useEffect(() => {
-    loadLugar()
+    loadEstado()
   }, [])
 
 
   // Filtrar lugares según el término de búsqueda
-  const filteredLugars = lugars.filter((lugar) =>
-    lugar.lugar.toLowerCase().includes(searchTerm.toLowerCase())
+  const filterdEstados = estado.filter((estado) =>
+    estado.estado.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Calcular elementos para la página actual
-  const totalPages = Math.ceil(filteredLugars.length / itemsPerPage);
+  const totalPages = Math.ceil(filterdEstados.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentLugars = filteredLugars.slice(startIndex, startIndex + itemsPerPage);
+  const currentEstados = filterdEstados.slice(startIndex, startIndex + itemsPerPage);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -59,11 +59,11 @@ export default function LugarList() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
 
 
-          <Typography variant="h5" sx={{ flexGrow: 1 }}>Lista de Lugares</Typography>
+          <Typography variant="h5" sx={{ flexGrow: 1 }}>Lista de Estados</Typography>
           <Button
             variant="contained"
             color="primary"
-            onClick={() => navegate('/lugar/new')}
+            onClick={() => navegate('/estado/new')}
           >
             Añadir
           </Button>
@@ -80,26 +80,26 @@ export default function LugarList() {
           style={{ marginBottom: "1.5rem" }}
         />
 
-        {currentLugars.map((lugar) => (
+        {currentEstados.map((estado) => (
           <Card style={{
             marginBottom: ".8rem",
             backgroundColor: "GrayText"
           }}
-            key={lugar.id_lugar}
+            key={estado.id_estado}
           >
             <CardContent style={{
               display: "flex",
               justifyContent: "space-between"
             }}>
               <div>
-                <Typography>{lugar.lugar}</Typography>
+                <Typography>{estado.estado}</Typography>
               </div>
 
               <div>
                 <Button
                   variant="contained"
                   color="warning"
-                  onClick={() => navegate(`/lugar/${lugar.id_lugar}/edit`)}
+                  onClick={() => navegate(`/estado/${estado.id_estado}/edit`)}
                 >
                   Editar
                 </Button>
@@ -109,7 +109,7 @@ export default function LugarList() {
                   color="error"
                   onClick={() => {
                     if (window.confirm("¿Está seguro de que desea eliminar este elemento?")) {
-                      handleDelete(lugar.id_lugar);
+                      handleDelete(estado.id_estado);
                     }
                   }}
                   style={{

@@ -40,7 +40,7 @@ export default function Deduccion() {
         }
 
         setLoading(false)
-        navegate('/')
+        navegate('/declaracionMas')
     }
 
     const handleChange = (e) => {
@@ -116,7 +116,7 @@ export default function Deduccion() {
                             /> : 'Guardar'}
                         </Button>
                         <Button
-                            variant='contained' color='error' onClick={() => navegate('/')}
+                            variant='contained' color='error' onClick={() => navegate('/declaracionMas')}
                         > 
                             Cancelar
                         </Button>

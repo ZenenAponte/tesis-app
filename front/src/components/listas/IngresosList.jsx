@@ -2,9 +2,9 @@ import { Button, Card, CardContent, Container, Typography, TextField } from "@mu
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export default function LugarList() {
+export default function IngresosList() {
 
-  const [lugars, setLugars] = useState([])
+  const [ingreso, setIngreso] = useState([])
   const [searchTerm, setSearchTerm] = useState(""); // Término de búsqueda
   const [currentPage, setCurrentPage] = useState(1); // Página actual
   const itemsPerPage = 4; // Máximo de elementos por página
@@ -12,21 +12,21 @@ export default function LugarList() {
 
   const navegate = useNavigate()
 
-  const loadLugar = async () => {
-    const response = await fetch('http://localhost:4000/lugar')
+  const loadIngreso = async () => {
+    const response = await fetch('http://localhost:4000/ingreso')
     const data = await response.json()
-    setLugars(data)
+    setIngreso(data)
   }
 
 
 
-  const handleDelete = async (id_lugar) => {
+  const handleDelete = async (id_ingre) => {
     try {
-      const res = await fetch(`http://localhost:4000/lugar/${id_lugar}`, {
+      const res = await fetch(`http://localhost:4000/ingreso/${id_ingre}`, {
         method: "DELETE",
       })
       console.log(res)
-      setLugars(lugars.filter(lugar => lugar.id_lugar !== id_lugar));
+      setIngreso(ingreso.filter(lugar => lugar.id_ingre !== id_ingre));
 
     } catch (error) {
       console.log(error)
@@ -34,19 +34,19 @@ export default function LugarList() {
   };
 
   useEffect(() => {
-    loadLugar()
+    loadIngreso()
   }, [])
 
 
   // Filtrar lugares según el término de búsqueda
-  const filteredLugars = lugars.filter((lugar) =>
-    lugar.lugar.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredIngresos = ingreso.filter((ingreso) =>
+    ingreso.tipo.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Calcular elementos para la página actual
-  const totalPages = Math.ceil(filteredLugars.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredIngresos.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentLugars = filteredLugars.slice(startIndex, startIndex + itemsPerPage);
+  const currentIngresos = filteredIngresos.slice(startIndex, startIndex + itemsPerPage);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -59,11 +59,11 @@ export default function LugarList() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
 
 
-          <Typography variant="h5" sx={{ flexGrow: 1 }}>Lista de Lugares</Typography>
+          <Typography variant="h5" sx={{ flexGrow: 1 }}>Lista de Ingresos</Typography>
           <Button
             variant="contained"
             color="primary"
-            onClick={() => navegate('/lugar/new')}
+            onClick={() => navegate('/ingreso/new')}
           >
             Añadir
           </Button>
@@ -80,26 +80,29 @@ export default function LugarList() {
           style={{ marginBottom: "1.5rem" }}
         />
 
-        {currentLugars.map((lugar) => (
+        {currentIngresos.map((ingreso) => (
           <Card style={{
             marginBottom: ".8rem",
             backgroundColor: "GrayText"
           }}
-            key={lugar.id_lugar}
+            key={ingreso.id_ingre}
           >
             <CardContent style={{
               display: "flex",
               justifyContent: "space-between"
             }}>
               <div>
-                <Typography>{lugar.lugar}</Typography>
+                <Typography>{ingreso.tipo}</Typography>
+              </div>
+              <div>
+                <Typography>{ingreso.cantidad}</Typography>
               </div>
 
               <div>
                 <Button
                   variant="contained"
                   color="warning"
-                  onClick={() => navegate(`/lugar/${lugar.id_lugar}/edit`)}
+                  onClick={() => navegate(`/ingreso/${ingreso.id_ingre}/edit`)}
                 >
                   Editar
                 </Button>
@@ -109,7 +112,7 @@ export default function LugarList() {
                   color="error"
                   onClick={() => {
                     if (window.confirm("¿Está seguro de que desea eliminar este elemento?")) {
-                      handleDelete(lugar.id_lugar);
+                      handleDelete(ingreso.id_ingre);
                     }
                   }}
                   style={{

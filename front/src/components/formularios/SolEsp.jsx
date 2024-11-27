@@ -39,7 +39,7 @@ export default function SolEsp() {
         }
 
         setLoading(false)
-        navegate('/')
+        navegate('/reclamoMas')
     }
 
     const handleChange = (e) => {
@@ -104,7 +104,7 @@ export default function SolEsp() {
                             /> : 'Guardar'}
                         </Button>
                         <Button
-                            variant='contained' color='error' onClick={() => navegate('/')}
+                            variant='contained' color='error' onClick={() => navegate('/reclamoMas')}
                         > 
                             Cancelar
                         </Button>

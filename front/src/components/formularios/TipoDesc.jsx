@@ -39,7 +39,7 @@ export default function TipoDesc() {
         }
 
         setLoading(false)
-        navegate('/')
+        navegate('/impuestoMas')
     }
 
     const handleChange = (e) => {
@@ -104,7 +104,7 @@ export default function TipoDesc() {
                             /> : 'Guardar'}
                         </Button>
                         <Button
-                            variant='contained' color='error' onClick={() => navegate('/')}
+                            variant='contained' color='error' onClick={() => navegate('/impuestoMas')}
                         > 
                             Cancelar
                         </Button>

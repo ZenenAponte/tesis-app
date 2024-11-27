@@ -39,7 +39,7 @@ export default function Lugar() {
         }
 
         setLoading(false)
-        navegate('/lugar')
+        navegate('/reclamoMas')
     }
 
     const handleChange = (e) => {
@@ -104,7 +104,7 @@ export default function Lugar() {
                             /> : 'Guardar'}
                         </Button>
                         <Button
-                            variant='contained' color='error' onClick={() => navegate('/lugar')}
+                            variant='contained' color='error' onClick={() => navegate('/reclamoMas')}
                         > 
                             Cancelar
                         </Button>

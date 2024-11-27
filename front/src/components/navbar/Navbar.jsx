@@ -50,6 +50,7 @@ export default function Navbar() {
           onClose={handleContribuyentesClose}
         >
           <MenuItem component={Link} to="/contribuyente" onClick={handleContribuyentesClose}>Contribuyente</MenuItem>
+          <MenuItem component={Link} to="/bloqueo" onClick={handleContribuyentesClose}>Bloqueo</MenuItem>
           <MenuItem component={Link} to="/impuesto" onClick={handleContribuyentesClose}>Impuestos</MenuItem>
           <MenuItem component={Link} to="/reclamo" onClick={handleContribuyentesClose}>Reclamos</MenuItem>
           <MenuItem component={Link} to="/declaracion" onClick={handleContribuyentesClose}>Declaraciones</MenuItem>
@@ -62,24 +63,24 @@ export default function Navbar() {
           onClick={handleNuevoMenuClick}
           endIcon={<MenuIcon />}
         >
-          NUEVO MENÚ
+          MÁS
         </Button>
         <Menu
           anchorEl={anchorElNuevoMenu}
           open={Boolean(anchorElNuevoMenu)}
           onClose={handleNuevoMenuClose}
         >
-          <MenuItem component={Link} to="/opcion1" onClick={handleNuevoMenuClose}>Opción 1</MenuItem>
-          <MenuItem component={Link} to="/opcion2" onClick={handleNuevoMenuClose}>Opción 2</MenuItem>
-          <MenuItem component={Link} to="/opcion3" onClick={handleNuevoMenuClose}>Opción 3</MenuItem>
-          <MenuItem component={Link} to="/opcion4" onClick={handleNuevoMenuClose}>Opción 4</MenuItem>
-          <MenuItem component={Link} to="/opcion5" onClick={handleNuevoMenuClose}>Opción 5</MenuItem>
+          <MenuItem component={Link} to="/contribuyenteMas" onClick={handleNuevoMenuClose}>Contribuyentes</MenuItem>
+          <MenuItem component={Link} to="/bloqueoMas" onClick={handleNuevoMenuClose}>Bloqueo</MenuItem>
+          <MenuItem component={Link} to="/reclamoMas" onClick={handleNuevoMenuClose}>Reclamo</MenuItem>
+          <MenuItem component={Link} to="/impuestoMas" onClick={handleNuevoMenuClose}>Impuesto</MenuItem>
+          <MenuItem component={Link} to="/declaracionMas" onClick={handleNuevoMenuClose}>Declaración</MenuItem>
         </Menu>
 
         {/* Otros botones */}
-        <Button component={Link} to="/lugar" color="inherit">Prueba lugar</Button>
-        <Button component={Link} to="/forma" color="inherit">Prueba Forma</Button>
-        <Button component={Link} to="/tipo" color="inherit">Prueba Tipo</Button>
+        <Button component={Link} to="/informe" color="inherit">Reportes e Informes</Button>
+        <Button component={Link} to="/autenticar" color="inherit">Usuarios</Button>
+        
 
           <Notificacion/>
         {/* Icono de Logout */}

@@ -16,6 +16,10 @@ const { getSexo, postSexo, putSexo, deleteSexo } = require('../controller/sexo.c
 const { getSolicitudEsp, postSolicitudEsp, putSolicitudEsp, deleteSolicitudEsp } = require('../controller/solicitudEsp.controller');
 const { getTipoDesc, postTipoDesc, putTipoDesc, deleteTipoDesc } = require('../controller/tipoDesc.controller');
 const { getTipoImp, postTipoImp, putTipoImp, deleteTipoImp } = require('../controller/tipoImp.controller');
+const { getDeclaracion, postDeclaracion, putDeclaracion, deleteDeclaracion } = require('../controller/declaracion.controller');
+const { getDevolucion, postDevolucion, putDevolucion, deleteDevolucion} = require('../controller/devolucion.controller')
+const { getImpuesto, postImpuesto, putImpuesto, deleteImpuesto } = require('../controller/impuesto.controller')
+const { getReclamo, postReclamo, putReclamo, deleteReclamo } = require('../controller/reclamo.controller')
 
 const router = Router();
 
@@ -73,6 +77,16 @@ router.put('/causaDescrip/:id_causa_descrip',putCausaDescrip)
 router.delete('/causaDescrip/:id_causa_descrip',deleteCausaDescrip)
 
 
+//Declaracion
+router.get('/decla',getDeclaracion)
+
+router.post('/decla',postDeclaracion)
+
+router.put('/decla/:id_decla',putDeclaracion)
+
+router.delete('/decla/:id_decla',deleteDeclaracion)
+
+
 //Deduccion
 router.get('/deduccion',getDeduccion)
 
@@ -81,6 +95,18 @@ router.post('/deduccion',postDeduccion)
 router.put('/deduccion/:id_deduc',putDeduccion)
 
 router.delete('/deduccion/:id_deduc',deleteDeduccion)
+
+
+//Devolucion
+router.get('/devolucion',getDevolucion)
+
+router.post('/devolucion',postDevolucion)
+
+router.put('/devolucion/:id_devo',putDevolucion)
+
+router.delete('/devolucion/:id_devo',deleteDevolucion)
+
+
 
 
 //Direccion
@@ -113,6 +139,16 @@ router.put('/formaPago/:id_forma',putFormaPago)
 router.delete('/formaPago/:id_forma',deleteFormaPago)
 
 
+//Impuesto
+router.get('/impuesto',getImpuesto)
+
+router.post('/impuesto',postImpuesto)
+
+router.put('/impuesto/:id_impu',putImpuesto)
+
+router.delete('/impuesto/:id_impu',deleteImpuesto)
+
+
 //Ingreso
 router.get('/ingreso',getIngreso)
 
@@ -140,6 +176,22 @@ router.post('/notificacion',postNotificacion)
 router.put('/notificacion/:id_notif',putNotificacion)
 
 router.delete('/notificacion/:id_notif',deleteNotificacion)
+
+
+//Reclamo
+router.get('/reclamo',getReclamo)
+
+router.post('/reclamo',postReclamo)
+
+router.put('/reclamo/:id_reclamo',putReclamo)
+
+router.delete('/reclamo/:id_reclamo',deleteReclamo)
+
+//Reportes e Informes
+
+
+
+
 
 
 //Sexo

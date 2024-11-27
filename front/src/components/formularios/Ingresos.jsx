@@ -40,7 +40,7 @@ export default function Ingresos() {
         }
 
         setLoading(false)
-        navegate('/')
+        navegate('/DeclaracionMas')
     }
 
     const handleChange = (e) => {
@@ -116,7 +116,7 @@ export default function Ingresos() {
                             /> : 'Guardar'}
                         </Button>
                         <Button
-                            variant='contained' color='error' onClick={() => navegate('/')}
+                            variant='contained' color='error' onClick={() => navegate('/DeclaracionMas')}
                         > 
                             Cancelar
                         </Button>

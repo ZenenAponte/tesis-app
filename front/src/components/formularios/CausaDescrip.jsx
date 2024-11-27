@@ -39,7 +39,7 @@ export default function CausaDescrip() {
         }
 
         setLoading(false)
-        navegate('/')
+        navegate('/bloqueoMas')
     }
 
     const handleChange = (e) => {
@@ -104,7 +104,7 @@ export default function CausaDescrip() {
                             /> : 'Guardar'}
                         </Button>
                         <Button
-                            variant='contained' color='error' onClick={() => navegate('/')}
+                            variant='contained' color='error' onClick={() => navegate('/bloqueoMas')}
                         > 
                             Cancelar
                         </Button>
