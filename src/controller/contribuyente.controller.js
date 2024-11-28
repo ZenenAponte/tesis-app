@@ -47,28 +47,6 @@ async function obtenerContribuyentePorDni(dni) {
     }
 }
 
-async function obtenerContribuyentePorUserName(userName) {
-    const query = `
-        SELECT dni, nombre, first_apellido, second_apellido, edad, phone, email, 
-               id_direc, id_sex, id_notif, id_bloq, c.user_name
-        FROM contribuyentes c
-        WHERE user_name = $1;
-    `;
-
-    try {
-        const result = await pool.query(query, [userName]);
-
-        if (result.rows.length > 0) {
-            return result.rows[0];
-        } else {
-            return null; // No se encontró el contribuyente
-        }
-    } catch (error) {
-        console.error('Error al obtener el contribuyente:', error);
-        throw error; // Propaga el error para que sea manejado por el llamador
-    }
-}
-
 const postContribuyente = async (req, res, next) => {
   try {
     const {
@@ -178,6 +156,5 @@ module.exports = {
   putContribuyente,
   deleteContribuyente,
   getContribuyenteID,
-  obtenerContribuyentePorDni,
-  obtenerContribuyentePorUserName
+  obtenerContribuyentePorDni
 };
