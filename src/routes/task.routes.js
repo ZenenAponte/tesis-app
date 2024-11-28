@@ -4,7 +4,7 @@ const { getAutenticar, postAutenticar, putAutenticar, deleteAutenticar } = requi
 const { getBloqueo, postBloqueo, putBloqueo, deleteBloqueo } = require('../controller/bloqueo.controller');
 const { getCausa, postCausa, putCausa, deleteCausa } = require('../controller/causa.controller');
 const { getCausaDescrip, postCausaDescrip, putCausaDescrip, deleteCausaDescrip } = require('../controller/causaDescrip.controller');
-const { getContribuyente, postContribuyente, putContribuyente, deleteContribuyente } = require('../controller/contribuyente.controller');
+const { getContribuyente, postContribuyente, putContribuyente, deleteContribuyente, getContribuyenteID } = require('../controller/contribuyente.controller');
 const { getDeduccion, postDeduccion, putDeduccion, deleteDeduccion } = require('../controller/deduccion.controller');
 const { getDireccion, postDireccion, putDireccion, deleteDireccion } = require('../controller/direccion.controller');
 const { getEstado, postEstado, putEstado, deleteEstado } = require('../controller/estado.controller');
@@ -59,6 +59,8 @@ router.delete('/causa/:id_causa',deleteCausa)
 
 //Contribuyente
 router.get('/contribuyente',getContribuyente)
+
+router.get('/contribuyente/:dni',getContribuyenteID)
 
 router.post('/contribuyente',postContribuyente)
 
