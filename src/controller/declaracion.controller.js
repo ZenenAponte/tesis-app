@@ -14,9 +14,9 @@ const getDeclaracion = async (req, res, next) => {
 const postDeclaracion = async (req, res, next) => {
     
  try {
-        const { id_decla,fecha,id_ingre,id_deduc,dni} = req.body;
+        const { fecha,id_ingre,id_deduc,dni} = req.body;
         const result = await pool.query(
-            "INSERT INTO declaracion (id_decla,fecha,id_ingre,id_deduc,dni) VALUES ($1,$2,$3,$4,$5) RETURNING *", [id_decla,fecha,id_ingre,id_deduc,dni]
+            "INSERT INTO declaracion (fecha,id_ingre,id_deduc,dni) VALUES ($1,$2,$3,$4) RETURNING *", [fecha,id_ingre,id_deduc,dni]
         );
 
         res.json(result.rows[0]);

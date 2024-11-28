@@ -53,7 +53,7 @@ export default function Navbar() {
           <MenuItem component={Link} to="/bloqueo" onClick={handleContribuyentesClose}>Bloqueo</MenuItem>
           <MenuItem component={Link} to="/impuesto" onClick={handleContribuyentesClose}>Impuestos</MenuItem>
           <MenuItem component={Link} to="/reclamo" onClick={handleContribuyentesClose}>Reclamos</MenuItem>
-          <MenuItem component={Link} to="/declaracion" onClick={handleContribuyentesClose}>Declaraciones</MenuItem>
+          <MenuItem component={Link} to="/declaracionTabla" onClick={handleContribuyentesClose}>Declaraciones</MenuItem>
           <MenuItem component={Link} to="/devolucion" onClick={handleContribuyentesClose}>Devoluciones</MenuItem>
         </Menu>
 

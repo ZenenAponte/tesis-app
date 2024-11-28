@@ -2,9 +2,9 @@ import { Button, Card, CardContent, Container, Typography, TextField } from "@mu
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export default function SexoList() {
+export default function DireccionList() {
 
-  const [sexos, setSexos] = useState([])
+  const [direccion, setDireccion] = useState([])
   const [searchTerm, setSearchTerm] = useState(""); // Término de búsqueda
   const [currentPage, setCurrentPage] = useState(1); // Página actual
   const itemsPerPage = 4; // Máximo de elementos por página
@@ -12,21 +12,21 @@ export default function SexoList() {
 
   const navegate = useNavigate()
 
-  const loadSexo = async () => {
-    const response = await fetch('http://localhost:4000/sexo')
+  const loadDireccion = async () => {
+    const response = await fetch('http://localhost:4000/direccion')
     const data = await response.json()
-    setSexos(data)
+    setDireccion(data)
   }
 
 
 
-  const handleDelete = async (id_sexo) => {
+  const handleDelete = async (id_direcc) => {
     try {
-      const res = await fetch(`http://localhost:4000/sexo/${id_sexo}`, {
+      const res = await fetch(`http://localhost:4000/direccion/${id_direcc}`, {
         method: "DELETE",
       })
       console.log(res)
-      setSexos(sexos.filter(sexo => sexo.id_sexo !== id_sexo));
+      setDireccion(direccion.filter(direccion => direccion.id_direcc !== id_direcc));
 
     } catch (error) {
       console.log(error)
@@ -34,36 +34,37 @@ export default function SexoList() {
   };
 
   useEffect(() => {
-    loadSexo()
+    loadDireccion()
   }, [])
 
 
   // Filtrar lugares según el término de búsqueda
-  const filteredSexos = sexos.filter((sexo) =>
-    sexo.tipo.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredDireccions = direccion.filter((direccion) =>
+    direccion.nombre.toLowerCase().includes(searchTerm.toLowerCase()),
   );
+  
 
   // Calcular elementos para la página actual
-  const totalPages = Math.ceil(filteredSexos.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredDireccions.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentSexos = filteredSexos.slice(startIndex, startIndex + itemsPerPage);
+  const currentDireccions = filteredDireccions.slice(startIndex, startIndex + itemsPerPage);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
   return (
-    <Container style={{ width: '50%', margin: '0 auto', padding: '2rem 0' }} >
+    <Container style={{ width: '70%', margin: '0 auto', padding: '2rem 0' }} >
 
       <>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
 
 
-          <Typography variant="h5" sx={{ flexGrow: 1 }}>Lista de Sexos</Typography>
+          <Typography variant="h5" sx={{ flexGrow: 1 }}>Lista de Direcciones</Typography>
           <Button
             variant="contained"
             color="primary"
-            onClick={() => navegate('/sexo/new')}
+            onClick={() => navegate('/direccion/new')}
           >
             Añadir
           </Button>
@@ -80,26 +81,35 @@ export default function SexoList() {
           style={{ marginBottom: "1.5rem" }}
         />
 
-        {currentSexos.map((sexo) => (
+        {currentDireccions.map((direccion) => (
           <Card style={{
             marginBottom: ".8rem",
             backgroundColor: "GrayText"
           }}
-            key={sexo.id_sexo}
+            key={direccion.id_direcc}
           >
             <CardContent style={{
               display: "flex",
               justifyContent: "space-between"
             }}>
               <div>
-                <Typography>{sexo.tipo}</Typography>
+                <Typography>{direccion.nombre}</Typography>
+              </div>
+              <div>
+                <Typography>{`#`+direccion.numero}</Typography>
+              </div>
+              <div>
+                <Typography>{direccion.calle1}</Typography>
+              </div>
+              <div>
+                <Typography>{direccion.calle2}</Typography>
               </div>
 
               <div>
                 <Button
                   variant="contained"
                   color="warning"
-                  onClick={() => navegate(`/sexo/${sexo.id_sexo}/edit`)}
+                  onClick={() => navegate(`/direccion/${direccion.id_direcc}/edit`)}
                 >
                   Editar
                 </Button>
@@ -109,7 +119,7 @@ export default function SexoList() {
                   color="error"
                   onClick={() => {
                     if (window.confirm("¿Está seguro de que desea eliminar este elemento?")) {
-                      handleDelete(sexo.id_sexo);
+                      handleDelete(direccion.id_direcc);
                     }
                   }}
                   style={{

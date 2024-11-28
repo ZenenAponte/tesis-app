@@ -43,6 +43,16 @@ import CausaList from './components/listas/CausaList.jsx'
 
 
 
+import ContribuyenteMas from './components/navbar/navbar1/ContribuyenteMas.jsx'
+import DireccionList from './components/listas/DireccionList.jsx'
+import Direccion from './components/formularios/Direccion.jsx'
+import SexoList from './components/listas/SexoList.jsx'
+import Sexo from './components/formularios/Sexo.jsx'
+
+import Declaracion from './components/dataTable/Declaracion.jsx'
+
+
+
 
 
 export default function App() {
@@ -94,7 +104,7 @@ export default function App() {
           <Route path='/deduccion' element={< DeduccionList/>} />
 
 
-          //Bloqueo
+          //BloqueoMas
           <Route path='/BloqueoMas' element={<BloqueoMas />} />
           //Causa
           <Route path='/causa/new' element={<Causa/>} />
@@ -104,6 +114,20 @@ export default function App() {
           <Route path='/causaDescrip' element={< CausaDescripList/>} />
 
 
+
+          //ContribuyenteMas
+          <Route path='/ContribuyenteMas' element={<ContribuyenteMas />} />
+          //Direccion
+          <Route path='/direccion/new' element={< Direccion/>} />
+          <Route path='/direccion' element={< DireccionList/>} />
+          //Sexo
+          <Route path='/sexo/new' element={< Sexo/>} />
+          <Route path='/sexo' element={< SexoList/>} />
+
+
+          //DataTable
+          //Declaracion
+          <Route path='/declaracionTabla' element={<Declaracion />} />
 
 
 

@@ -3,10 +3,13 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 
-export default function Sexo() {
+export default function Direccion() {
 
-    const [sexo, setSexo] = useState({
-        tipo: '',
+    const [direccion, setDireccion] = useState({
+        nombre:'',
+        numero:'',
+        calle1:'',
+        calle2:'',
     })
 
     const [loading, setLoading] = useState(false)
@@ -21,18 +24,18 @@ export default function Sexo() {
         setLoading(true)
 
         if (editing) {
-            await fetch(`http://localhost:4000/sexo/`, {
+            await fetch(`http://localhost:4000/direccion/`, {
                 method: 'PUT',
                 headers: {
                     "Contenet-Type": "applicaion/json",
                 },
-                body: JSON.stringify(sexo),
+                body: JSON.stringify(direccion),
             });
 
         } else {
-            await fetch('http://localhost:4000/sexo', {
+            await fetch('http://localhost:4000/direccion', {
                 method: 'POST',
-                body: JSON.stringify(sexo),
+                body: JSON.stringify(direccion),
                 headers: { 'Content-Type': 'application/json' },
             })
 
@@ -43,14 +46,14 @@ export default function Sexo() {
     }
 
     const handleChange = (e) => {
-        setSexo({ ...sexo, [e.target.name]: e.target.value });
+        setDireccion({ ...direccion, [e.target.name]: e.target.value });
     }
 
-    const loadUnsexo = async (id_sexo) => {
-        const res = await fetch(`http://localhost:4000/sexo/${id_sexo}`)
+    const loadUnDireccion = async (id_direcc) => {
+        const res = await fetch(`http://localhost:4000/direccion/${id_direcc}`)
         const data = await res.json()
         console.log(data)
-        //setSexo({ sexo: data.sexo })
+        //setDireccion({ direccion: data.direccion })
         //setEditing(true)
     };
 
@@ -58,10 +61,10 @@ export default function Sexo() {
 
 
     useEffect(() => {
-        if (params.id_sexo) {
-            loadUnsexo(params.id_sexo);
+        if (params.id_direcc) {
+            loadUnDireccion(params.id_direcc);
         }
-    }, [params.id_sexo]);
+    }, [params.id_direcc]);
 
 
 
@@ -77,25 +80,59 @@ export default function Sexo() {
 
             >
                 <Typography variant='h5' textAlign={'center'} padding={'5 rem'} >
-                    {editing ? "Edite su Sexo" : "Añadir un Sexo"}
+                    {editing ? "Editar Dirección" : "Añadir una Dirección"}
                 </Typography>
                 <CardContent>
                     <form onSubmit={handleSubmit}>
                         <TextField
-                            name='tipo'
-                            value={sexo.tipo}
+                            name='nombre'
+                            value={direccion.nombre}
                             variant='filled'
-                            label='Escriba su Sexo'
+                            label='Escriba el Nombre de la Calle'
                             sx={{
                                 display: 'block',
                                 margin: '1.5 rem '
                             }}
                             onChange={handleChange}
                         />
+                        <TextField
+                            name='numero'
+                            value={direccion.numero}
+                            variant='filled'
+                            label='Escriba el #'
+                            sx={{
+                                display: 'block',
+                                margin: '1.5 rem '
+                            }}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            name='calle1'
+                            value={direccion.calle1}
+                            variant='filled'
+                            label='Escriba la 1era Calle'
+                            sx={{
+                                display: 'block',
+                                margin: '1.5 rem '
+                            }}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            name='calle2'
+                            value={direccion.calle2}
+                            variant='filled'
+                            label='Escriba la 2da Calle'
+                            sx={{
+                                display: 'block',
+                                margin: '1.5 rem '
+                            }}
+                            onChange={handleChange}
+                        />
+
                         <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
 
                         <Button variant='contained' color='primary' type='submit' disabled={
-                            !sexo.tipo
+                            !direccion.nombre || !direccion.numero || !direccion.calle1
                         }>
                             {loading ? <CircularProgress
                                 color='inherit'
