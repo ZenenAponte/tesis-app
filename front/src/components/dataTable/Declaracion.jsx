@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { TextField, IconButton, Box, Tooltip } from '@mui/material';
-import { Edit, Visibility } from '@mui/icons-material';
+import { Edit, Delete } from '@mui/icons-material';
 
 const Declaracion = () => {
   const [rows, setRows] = useState([]);
@@ -28,7 +28,7 @@ const Declaracion = () => {
           </Tooltip>
           <Tooltip title="Ver Detalles">
             <IconButton color="secondary" onClick={() => handleView(params.row)}>
-              <Visibility />
+              <Delete />
             </IconButton>
           </Tooltip>
         </Box>

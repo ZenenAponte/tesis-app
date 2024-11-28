@@ -14,9 +14,9 @@ const getContribuyente = async (req, res, next) => {
 const postContribuyente = async (req, res, next) => {
     
  try {
-        const { dni,nombre,first_apellido,second_apellido,edad,phone,email,id_direc,id_sex,id_notif,id_bloq,id_user} = req.body;
+        const { dni,nombre,first_apellido,second_apellido,edad,phone,email,id_direc,id_sex,id_notif,id_bloq,user_name} = req.body;
         const result = await pool.query(
-            "INSERT INTO contribuyente (dni,nombre,first_apellido,second_apellido,edad,phone,email,id_direc,id_sex,id_notif,id_bloq,id_user) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *", [dni,nombre,first_apellido,second_apellido,edad,phone,email,id_direc,id_sex,id_notif,id_bloq,id_user]
+            "INSERT INTO contribuyente (dni,nombre,first_apellido,second_apellido,edad,phone,email,id_direc,id_sex,id_notif,id_bloq,user_name) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *", [dni,nombre,first_apellido,second_apellido,edad,phone,email,id_direc,id_sex,id_notif,id_bloq,user_name]
         );
 
         res.json(result.rows[0]);
@@ -31,8 +31,8 @@ const postContribuyente = async (req, res, next) => {
 const putContribuyente = async (req, res, next) => {
     try {
         const { dni } = req.params;
-        const { nombre,first_apellido,second_apellido,edad,phone,email,id_direc,id_sex,id_notif,id_bloq,id_user } = req.body
-        const result = await pool.query("UPDATE contribuyente SET nombre = $1 ,first_apellido = $2,second_apellido = $3,edad = $4,phone = $5,email = $6,id_direc = $7,id_sex = $8,id_notif = $9,id_bloq = $10, id_user = $11 WHERE dni=$12 RETURNING *", [nombre,first_apellido,second_apellido,edad,phone,email,id_direc,id_sex,id_notif,id_bloq,id_user,dni]);
+        const { nombre,first_apellido,second_apellido,edad,phone,email,id_direc,id_sex,id_notif,id_bloq,user_name } = req.body
+        const result = await pool.query("UPDATE contribuyente SET nombre = $1 ,first_apellido = $2,second_apellido = $3,edad = $4,phone = $5,email = $6,id_direc = $7,id_sex = $8,id_notif = $9,id_bloq = $10, user_name = $11 WHERE dni=$12 RETURNING *", [nombre,first_apellido,second_apellido,edad,phone,email,id_direc,id_sex,id_notif,id_bloq,user_name,dni]);
 
         if (result.rowCount === 0)
             return res.status(404).json({
